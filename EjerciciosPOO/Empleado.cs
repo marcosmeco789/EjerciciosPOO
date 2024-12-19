@@ -70,6 +70,15 @@ namespace EjerciciosPOO
 
         }
 
+        public override void Introduccion()
+        {
+            base.Introduccion();
+            Console.WriteLine("Introduce el salario: ");
+            Salario = int.Parse(Console.ReadLine());
+            Console.WriteLine("Introduce el telefono: ");
+            Telefono = Console.ReadLine();
+        }
+
         public void mostrar(int num)
         {
             switch (num)
