@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace EjerciciosPOO
 {
@@ -11,11 +12,33 @@ namespace EjerciciosPOO
             Console.WriteLine(inter.ganarPasta(double.Parse(Console.ReadLine())) + "€");
         }
 
+
+
         static void Main(string[] args)
         {
             List<Persona> personas = new List<Persona>();
             Lectora leer;
             Escritora escribir;
+
+            string path = Environment.GetEnvironmentVariable("appdata")+"\\bdPersonas.dat";
+
+            if (File.Exists(path))
+            {
+                Empleado empleado = new Empleado();
+                leer = new Lectora(File.Open(path, FileMode.Open));
+                empleado = leer.ReadEmpleado();
+                leer.Dispose();
+
+                personas.Add(empleado);
+
+            }
+
+
+
+
+            
+            
+
 
             int selector;
             do
@@ -33,6 +56,12 @@ namespace EjerciciosPOO
                         Empleado emp = new Empleado();
                         emp.Introduccion();
                         personas.Add(emp);
+
+
+                        escribir = new Escritora(File.Open(path, FileMode.Append));
+                        escribir.Write(emp);
+                        escribir.Dispose();
+
                         break;
                     case 2:
                         Directivo dir = new Directivo();

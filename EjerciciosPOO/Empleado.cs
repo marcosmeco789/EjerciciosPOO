@@ -124,7 +124,7 @@ namespace EjerciciosPOO
         }
 
 
-        public Empleado(string nombre, string apellidos, int edad, string dni, int salario, string telefono)
+        public Empleado(string nombre, string apellidos, int edad, string dni, double salario, string telefono)
             : base(nombre, apellidos, edad, dni)
         {
 

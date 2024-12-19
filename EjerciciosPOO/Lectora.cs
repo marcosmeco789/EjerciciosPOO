@@ -15,14 +15,16 @@ namespace EjerciciosPOO
 
         public Empleado ReadEmpleado()
         {
-
             string nombre = ReadString();
             string apellidos = ReadString();
             int edad = ReadInt32();
             string dni = ReadString();
-            int salario = ReadInt32();
-            string telefono = ReadString();
-
+            if (dni.Length > 0)
+            {
+                dni = dni.Remove(dni.Length - 1);
+            }
+            double salario = ReadDouble();
+            string telefono = ReadString().Substring(3);
 
             return new Empleado(nombre, apellidos, edad, dni, salario, telefono);
         }
