@@ -83,10 +83,17 @@ namespace EjerciciosPOO
             Console.WriteLine("Introduce los apellidos: ");
             Apellidos = Console.ReadLine();
             Console.WriteLine("Introduce la edad: ");
-            Edad = int.Parse(Console.ReadLine());
+            try
+            {
+                Edad = int.Parse(Console.ReadLine());
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Formato de edad no válido. Se establecerá a 0.");
+                Edad = 0;
+            }
             Console.WriteLine("Introduce el dni (sin la letra): ");
             Dni = Console.ReadLine();
-
         }
 
         public abstract double Hacienda();

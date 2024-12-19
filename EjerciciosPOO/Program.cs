@@ -12,32 +12,39 @@ namespace EjerciciosPOO
             Console.WriteLine(inter.ganarPasta(double.Parse(Console.ReadLine())) + "€");
         }
 
-
-
         static void Main(string[] args)
         {
             List<Persona> personas = new List<Persona>();
             Lectora leer;
             Escritora escribir;
 
-            string path = Environment.GetEnvironmentVariable("appdata")+"\\bdPersonas.dat";
+            string path = Environment.GetEnvironmentVariable("appdata") + "\\bdPersonas.dat";
 
             if (File.Exists(path))
             {
-                Empleado empleado = new Empleado();
                 leer = new Lectora(File.Open(path, FileMode.Open));
-                empleado = leer.ReadEmpleado();
+
+                while ((leer.BaseStream.Position != leer.BaseStream.Length))
+                {
+                    string identificador = leer.ReadString();
+                    if (identificador == "emp")
+                    {
+                        Empleado empleado = leer.ReadEmpleado();
+                        personas.Add(empleado);
+                    }
+                    else if (identificador == "dir")
+                    {
+                        Directivo directivo = leer.ReadDirectivo();
+                        personas.Add(directivo);
+                    } else
+                    {
+                        Console.WriteLine("Hay algun error con el archivo!\nPulsa alguna tecla para cerrar");
+                        Console.ReadKey();
+                        Environment.Exit(1);
+                    }
+                }
                 leer.Dispose();
-
-                personas.Add(empleado);
-
             }
-
-
-
-
-            
-            
 
 
             int selector;
@@ -57,16 +64,20 @@ namespace EjerciciosPOO
                         emp.Introduccion();
                         personas.Add(emp);
 
-
                         escribir = new Escritora(File.Open(path, FileMode.Append));
                         escribir.Write(emp);
                         escribir.Dispose();
 
                         break;
                     case 2:
-                        Directivo dir = new Directivo();
-                        dir.Introduccion();
-                        personas.Add(dir);
+                        Directivo direc = new Directivo();
+                        direc.Introduccion();
+                        personas.Add(direc);
+
+                        escribir = new Escritora(File.Open(path, FileMode.Append));
+                        escribir.Write(direc);
+                        escribir.Dispose();
+
                         break;
                     case 3:
                         VisualizarColeccion(personas);

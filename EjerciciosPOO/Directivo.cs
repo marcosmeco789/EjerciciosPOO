@@ -81,8 +81,14 @@ namespace EjerciciosPOO
             Departamento = Console.ReadLine();
 
             Console.WriteLine("Introduce el numero de personas: ");
-            Personas = int.Parse(Console.ReadLine());
-
+            string input = Console.ReadLine();
+            int personas;
+            while (!int.TryParse(input, out personas))
+            {
+                Console.WriteLine("Numero no valido. introduce un numero entero:");
+                input = Console.ReadLine();
+            }
+            Personas = personas;
         }
 
 

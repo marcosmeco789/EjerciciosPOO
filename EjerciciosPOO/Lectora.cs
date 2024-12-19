@@ -15,6 +15,34 @@ namespace EjerciciosPOO
 
         public Empleado ReadEmpleado()
         {
+            try
+            {
+                string nombre = ReadString();
+                string apellidos = ReadString();
+                int edad = ReadInt32();
+                string dni = ReadString();
+                if (dni.Length > 0)
+                {
+                    dni = dni.Remove(dni.Length - 1);
+                }
+                double salario = ReadDouble();
+                string telefono = ReadString().Substring(3);
+
+                return new Empleado(nombre, apellidos, edad, dni, salario, telefono);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR AL LEER EL ARCHIVO: " + ex.Message);
+                Console.WriteLine("Presione cualquier tecla para cerrar...");
+                Console.ReadKey();
+                BaseStream.Close();
+                Environment.Exit(1);
+                return null;
+            }
+        }
+
+        public Directivo ReadDirectivo()
+        {
             string nombre = ReadString();
             string apellidos = ReadString();
             int edad = ReadInt32();
@@ -23,21 +51,6 @@ namespace EjerciciosPOO
             {
                 dni = dni.Remove(dni.Length - 1);
             }
-            double salario = ReadDouble();
-            string telefono = ReadString().Substring(3);
-
-            return new Empleado(nombre, apellidos, edad, dni, salario, telefono);
-        }
-
-        public Directivo ReadDirectivo()
-        {
-
-
-            string nombre = ReadString();
-            string apellidos = ReadString();
-            int edad = ReadInt32();
-            string dni = ReadString();
-            double salario = ReadDouble();
             string departamento = ReadString();
             int personas = ReadInt32();
 

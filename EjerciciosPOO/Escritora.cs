@@ -15,6 +15,7 @@ namespace EjerciciosPOO
 
         public void Write(Empleado emp)
         {
+            base.Write("emp");
             base.Write(emp.Nombre);
             base.Write(emp.Apellidos);
             base.Write(emp.Edad);
@@ -25,6 +26,7 @@ namespace EjerciciosPOO
 
         public void Write(Directivo dir)
         {
+            base.Write("dir");
             base.Write(dir.Nombre);
             base.Write(dir.Apellidos);
             base.Write(dir.Edad);
